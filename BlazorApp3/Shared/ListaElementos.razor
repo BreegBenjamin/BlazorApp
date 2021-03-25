@@ -1,0 +1,129 @@
+﻿<section style="display:grid; grid-template-columns:1fr 1fr; grid-gap:20px;">
+    <div>
+        <p>Ejercicio 1 desde el iterador <h3>ForEach</h3></p>
+        <br />
+        <ul class="list-group">
+            @foreach (var item in _salmons)
+            {
+                <li class="list-group-item">@item</li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio1">Click 1</button>
+    </div>
+    <div>
+        <p>Ejercicio 2 desde el <h3>Bucle For</h3></p>
+        <br />
+        <ul class="list-group">
+            @for (int i = 0; i < _salmonsFor.Count; i++)
+            {
+                <li class="list-group-item">@_salmonsFor[i]</li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio2">Click 2</button>
+    </div>
+    <div>
+        <p>Ejercicio 3 Inicialización de la lista</p>
+        <br />
+        <ul class="list-group">
+            @for (int i = 0; i < _salmons3.Count; i++)
+            {
+                <li class="list-group-item">@_salmons3[i]</li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio3">Click 3</button>
+    </div>
+    <div>
+        <p>Ejercicio 4 Remover Elementos</p>
+        <br />
+        <ul class="list-group">
+            @foreach (var item in removeElements)
+            {
+                <li class="list-group-item">@item</li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio4">Click 4</button>
+    </div>
+    <div>
+        <p>Ejercicio 5 Numeros pares</p>
+        <br />
+        <ul class="list-group">
+            @foreach (var item in numbers)
+            {
+                <li class="list-group-item">@item</li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio5">Click 5</button>
+    </div>
+    <div>
+        <p>Ejercicio 6 Galaxias</p>
+        <br />
+        <ul class="list-group">
+            @foreach (var item in galaxieList)
+            {
+                <li class="list-group-item">
+                    @item.Name   - @item.MegaLightYears
+                </li>
+            }
+        </ul>
+        <br />
+        <button class="btn btn-info" @onclick="@Ejerccio6">Click 6</button>
+    </div>
+</section>
+
+@code {
+    private List<string> _salmons = new List<string> ();
+    private List<string> _salmonsFor = new List<string> ();
+    private List<string> _salmons3 = new List<string> ();
+    private List<string> removeElements = new List<string> { "chinook", "coho", "pink", "sockeye" };
+    private List<int> numbers = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    private List<Galaxy> galaxieList = new List<Galaxy>();
+
+
+    private void Ejerccio1()
+    {
+        _salmons = new List<string>{ "chinook", "coho", "pink", "sockeye" };
+    }
+
+    private void Ejerccio2()
+    {
+        _salmonsFor = new List<string> { "chinook", "coho", "pink", "sockeye" };
+    }
+
+    private void Ejerccio3()
+    {
+        _salmons3.Add("chinook");
+        _salmons3.Add("coho");
+        _salmons3.Add("pink");
+        _salmons3.Add("sockeye");
+    }
+
+    private void Ejerccio4()
+    {
+        int index = removeElements.Count -1;
+        if (removeElements.Count > 0)
+        {
+            removeElements.RemoveAt(index);
+            index--;
+        }
+    }
+
+    private void Ejerccio5()
+    {
+        numbers = numbers.Where(x=> x % 2 == 0 ).ToList();
+    }
+    private void Ejerccio6()
+    {
+        galaxieList = new List<Galaxy>
+        {
+            new Galaxy(){Name="Vía Láctea",MegaLightYears = "200 000 años luz" },
+            new Galaxy(){Name="Andrómeda",MegaLightYears = "2.537 años luz" },
+            new Galaxy(){Name="Boötes I",MegaLightYears = "23.16 años luz" },
+            new Galaxy(){Name="Reticulum II",MegaLightYears = "200 000 años luz" },
+        };
+    }
+}
